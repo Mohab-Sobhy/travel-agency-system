@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+//using travel_agency_system.Models;
+
 namespace travel_agency_system;
 
 public class Program
@@ -9,6 +12,7 @@ public class Program
         // Add services to the container.
 
         builder.Services.AddControllers();
+        //builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
