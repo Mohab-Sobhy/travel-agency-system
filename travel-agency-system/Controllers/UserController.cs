@@ -16,7 +16,7 @@ namespace travel_agency_system.Controllers
             _context = context;
         }
         
-        [HttpGet]
+        [HttpGet("{id}")]
         public IActionResult displayEmpNo(String id)
         {
             User user = _context.Users.FirstOrDefault(u => u.UserId == id);
