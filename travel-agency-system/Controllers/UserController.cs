@@ -9,15 +9,15 @@ namespace travel_agency_system.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly TravelAgencySystemContext _context;
+        private readonly DBContext _context;
 
-        public UserController(TravelAgencySystemContext context)
+        public UserController(DBContext context)
         {
             _context = context;
         }
         
         [HttpGet("{id}")]
-        public IActionResult displayEmpNo(String id)
+        public IActionResult displayEmpNo(int id)
         {
             User user = _context.Users.FirstOrDefault(u => u.UserId == id);
 

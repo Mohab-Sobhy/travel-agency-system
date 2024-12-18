@@ -5,23 +5,21 @@ namespace travel_agency_system.Models;
 
 public partial class Notification
 {
-    public string NotificationId { get; set; } = null!;
-
-    public string? UserId { get; set; }
-
-    public string Message { get; set; } = null!;
+    public int NotificationId { get; set; }
 
     public string Type { get; set; } = null!;
 
-    public DateOnly Date { get; set; }
+    public int TemplateId { get; set; }
 
-    public virtual ICollection<Activation> Activations { get; set; } = new List<Activation>();
+    public int UserId { get; set; }
 
-    public virtual ICollection<BookingConfirmation> BookingConfirmations { get; set; } = new List<BookingConfirmation>();
+    public string? Status { get; set; }
 
-    public virtual ICollection<NotificationService> NotificationServices { get; set; } = new List<NotificationService>();
+    public DateTime? Timestamp { get; set; }
 
-    public virtual ICollection<ResetPassword> ResetPasswords { get; set; } = new List<ResetPassword>();
+    public virtual ICollection<NotificationQueue> NotificationQueues { get; set; } = new List<NotificationQueue>();
 
-    public virtual User? User { get; set; }
+    public virtual Template Template { get; set; } = null!;
+
+    public virtual User User { get; set; } = null!;
 }
