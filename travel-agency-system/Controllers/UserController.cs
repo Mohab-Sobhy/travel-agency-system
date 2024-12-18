@@ -19,7 +19,6 @@ namespace travel_agency_system.Controllers
         [HttpGet]
         public IActionResult displayEmpNo(String id)
         {
-            // البحث عن المستخدم في قاعدة البيانات باستخدام معرّف المستخدم
             User user = _context.Users.FirstOrDefault(u => u.UserId == id);
 
             if (user == null)
