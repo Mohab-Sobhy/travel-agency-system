@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using travel_agency_system.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace travel_agency_system;
 
@@ -11,11 +12,20 @@ public class Program
 
         // Add services to the container.
 
+        // تسجيل Identity
+        builder.Services.AddIdentity<User, IdentityRole>()
+            .AddEntityFrameworkStores<DBContext>()
+            .AddDefaultTokenProviders();
+
+        // إضافة DbContext
+        builder.Services.AddDbContext<DBContext>(options => 
+            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+        );
+
+        // إضافة باقي الخدمات
         builder.Services.AddControllers();
-        
-        builder.Services.AddDbContext<DBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-        
-        // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+        // إضافة Swagger
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
@@ -30,7 +40,7 @@ public class Program
 
         app.UseAuthorization();
 
-
+        // ربط الـ Controllers
         app.MapControllers();
 
         app.Run();

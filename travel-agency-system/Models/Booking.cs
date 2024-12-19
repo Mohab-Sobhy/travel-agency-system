@@ -3,11 +3,12 @@ using System.Collections.Generic;
 
 namespace travel_agency_system.Models;
 
-public partial class Booking
+public class Booking
 {
     public int BookingId { get; set; }
 
-    public int UserId { get; set; }
+    // تغيير نوع المفتاح الأجنبي ليطابق نوع المفتاح الأساسي في User (string)
+    public string UserId { get; set; } = null!; 
 
     public string Type { get; set; } = null!;
 
