@@ -15,4 +15,8 @@ public class UserRegistrationDto
 
     [Required(ErrorMessage = "Password cannot be empty.")]
     public string Password { get; set; } = null!;
+
+    public string? Role { get; set; } = null!;
+    
+    public string? AdminVerificationCode { get; set; } = null!;
 }

@@ -6,8 +6,7 @@ namespace travel_agency_system.Models;
 public class Booking
 {
     public int BookingId { get; set; }
-
-    // تغيير نوع المفتاح الأجنبي ليطابق نوع المفتاح الأساسي في User (string)
+    
     public string UserId { get; set; } = null!; 
 
     public string Type { get; set; } = null!;
