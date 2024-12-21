@@ -1,5 +1,3 @@
-using travel_agency_system.Models;
-
 namespace travel_agency_system.DTO;
 
 public class HotelAddDto

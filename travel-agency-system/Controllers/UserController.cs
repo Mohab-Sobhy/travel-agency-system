@@ -14,10 +14,10 @@ namespace travel_agency_system.Controllers
     public class UserController : ControllerBase
     {
         private readonly TokenService _tokenService;
-        private readonly DBContext _context;
+        private readonly HotelManagementContext _context;
         private readonly UserManager<User> _userManager;
 
-        public UserController(TokenService tokenService, DBContext context, UserManager<User> userManager)
+        public UserController(TokenService tokenService, HotelManagementContext context, UserManager<User> userManager)
         {
             _tokenService = tokenService;
             _context = context;

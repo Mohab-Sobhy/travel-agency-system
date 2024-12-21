@@ -17,16 +17,14 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
 
         // Add services to the container.
-
-        NotificationManager notificationManager = new NotificationManager();
         
         // تسجيل Identity
         builder.Services.AddIdentity<User, IdentityRole>()
-            .AddEntityFrameworkStores<DBContext>()
+            .AddEntityFrameworkStores<HotelManagementContext>()
             .AddDefaultTokenProviders();
-
+        
         // إضافة DbContext
-        builder.Services.AddDbContext<DBContext>(options => 
+        builder.Services.AddDbContext<HotelManagementContext>(options => 
             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
         );
         
@@ -91,8 +89,12 @@ public class Program
             });
         });
         #endregion
-
+        
+        builder.Services.AddSingleton<NotificationManager>();
+        
         var app = builder.Build();
+        
+        app.Services.GetRequiredService<NotificationManager>().StartNotificationSender();
 
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
@@ -107,6 +109,9 @@ public class Program
 
         // ربط الـ Controllers
         app.MapControllers();
+
+        // بدء تشغيل خدمة الإشعارات
+        app.Services.GetRequiredService<NotificationManager>().StartNotificationSender();
 
         app.Run();
     }
