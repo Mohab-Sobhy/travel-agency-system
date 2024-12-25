@@ -18,8 +18,7 @@ public class TokenService
     {
         var jwtSettings = _configuration.GetSection("JwtSettings");
         var secretKey = Encoding.UTF8.GetBytes(jwtSettings["Secret"]);
-
-        // إعداد البيانات التي سيتم تضمينها في الـ Token
+        
         var claims = new[]
         {
             new Claim(JwtRegisteredClaimNames.Sub, id),

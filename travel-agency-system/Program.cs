@@ -18,19 +18,16 @@ public class Program
 
         // Add services to the container.
         
-        // تسجيل Identity
         builder.Services.AddIdentity<User, IdentityRole>()
             .AddEntityFrameworkStores<HotelManagementContext>()
             .AddDefaultTokenProviders();
         
-        // إضافة DbContext
         builder.Services.AddDbContext<HotelManagementContext>(options => 
             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
         );
         
         builder.Services.AddScoped<TokenService>();
         
-        // إعداد المصادقة باستخدام JWT
         builder.Services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -47,11 +44,9 @@ public class Program
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("mohabSecure###112233kjarsfsdjfisuehriuhesrhiseerfsedds,m32345qwewsd"))
                 };
             });
-
-        // إضافة باقي الخدمات
+        
         builder.Services.AddControllers();
-
-        // إضافة Swagger
+        
         builder.Services.AddEndpointsApiExplorer();
         
         #region Swagger Setting
@@ -95,7 +90,7 @@ public class Program
         var app = builder.Build();
         
         app.Services.GetRequiredService<NotificationManager>().StartNotificationSender();
-
+        
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
         {
@@ -103,14 +98,11 @@ public class Program
             app.UseSwaggerUI();
         }
 
-        // إضافة المصادقة
         app.UseAuthentication();
         app.UseAuthorization();
 
-        // ربط الـ Controllers
         app.MapControllers();
 
-        // بدء تشغيل خدمة الإشعارات
         app.Services.GetRequiredService<NotificationManager>().StartNotificationSender();
 
         app.Run();
